@@ -73,7 +73,7 @@ Right here you can see a Flowchart produced to briefly describe the ideas i had 
 <!-- ![my_flowchart](https://github.com/claudio-dg/Research_Track-Assignments/blob/main/my_FlowChart_Res_track_1.png?raw=true) --> 
 
 <p align="center">
-<img src="https://github.com/claudio-dg/second_assignment/blob/main/rosgraph.png?raw=true" width="800" />
+<img src="https://github.com/claudio-dg/second_assignment/blob/main/rosgraph.png?raw=true" width="800" height="5" />
 <p>
  
  

@@ -14,12 +14,12 @@ To do this we had to use ROS for controlling the robot and C++ as programming la
 Table of contents
 ----------------------
 
-* [Setup-and-nodes-Introduction](#setup-and-nodes-Introduction)
+* [Setup](#setup)
 * [Flowchart and behaviour description](#flowchart-and-behaviour-description)
 * [Code explanation](#code-explanation)
 
 
-## Setup-and-nodes-Introduction
+## Setup
 
 This repository Contains all the useful files to run the script that i produced for this assignment.
 To try it, it is sufficient to clone this repository: 
@@ -34,9 +34,34 @@ and then type the following command in the terminal to simultaneously launch all
 $ roslaunch second_assignment starter.launch
 
 ```
-Scripts contained in the first three directories (i.e **games**, **sr** and **tests**) and in the **run.py** and **License.md** files have not been modified, 
-so the code that i produced is all included in the **assignment.py** file.
+This Launch File has been made to make it easier to run the poject , but if you like you can manually run every single node by typing the following commands:
 
+```bash
+$ roscore & 
+
+```
+To run the master.
+
+```bash
+$ rosrun stage_ros stageros $(rospack find second_assignment)/world/my_world.world
+```
+To run the simulation environment.
+
+```bash
+$ rosrun second_assignment second_assignment_node 
+```
+To run the controller.
+
+```bash
+$ rosrun second_assignment server_node
+```
+To run the service server.
+
+
+```bash
+$ rosrun second_assignment console_node
+```
+To run the input console.
 
 
 ## Flowchart and behaviour description

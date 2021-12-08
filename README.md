@@ -28,7 +28,7 @@ To try it, it is sufficient to clone this repository:
 $ git clone https://github.com/claudio-dg/Res_track_2nd_Assignment.git
 ```
 
-and then type the following command in the terminal to simultaneously launch all the neceassary nodes through the **"launchFile"**:
+and then type the following command in the terminal to simultaneously launch all the necessary nodes through the **"launchFile"**:
 
 ```bash
 $ roslaunch second_assignment starter.launch

@@ -74,7 +74,7 @@ The project is based on the ROS scheme that is shown in the following image:
  
 The ROS package of the project is called "second_assignment" and it contains four main nodes:
  1. **/world** : which was already given and sets the simulation environment.
-	- as we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can 	  receive msgs to set the robot' speed
+ - as we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can 	   receive msgs to set the robot' speed
 
  ### Behaviour description  : ### 
  

@@ -15,7 +15,7 @@ Table of contents
 ----------------------
 
 * [Setup](#setup)
-* [Flowchart and behaviour description](#flowchart-and-behaviour-description)
+* [Project structure and behaviour description](#project-structure-and-behaviour-description)
 * [Code explanation](#code-explanation)
 
 
@@ -64,7 +64,7 @@ $ rosrun second_assignment console_node
 To run the input console.
 
 
-## Flowchart and behaviour description
+## Project structure and behaviour description
 
 Right here you can see a Flowchart produced to briefly describe the ideas i had to obtain the required behaviour of the robot: everything is based on an infinite while loop, during which the robot takes different decisions basing on different possible variables.
 

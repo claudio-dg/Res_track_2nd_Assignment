@@ -95,16 +95,20 @@ The ROS package of the project is called "second_assignment", it contains one cu
 <p>
 	
 	
- - Then it will run the  ```controller```  : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit. When a variation of speed is published on the custom message, the controller modifies the linear velocity of the robot, also setting it to zero if the user wanted to stop the robot
+ - Then it will run the  ```controller```  : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit. When a variation of speed is published on the custom message, the controller modifies the linear velocity of the robot, also setting it to zero if the user wanted to stop the robot. Note that Robot's velocity won't go under 0: this to avoid the robot going bacwards and crashing.
 
-- On a second terminal the ```server``` starts running: it does nothing until someone calls the service /ChangeVel, in that case it will answer with the increment of speed required :+0.5 or -0.5 in case of increment and decrement, -1 in case of 'stop' (this is just a flag to notify that the speed must go to zero). In case of Reset it is encharged of calling an already given service ```/reset_position```, which sets the  robot to the starting position. In this project the reset only changes the position and not the speed, so if you want the robot to stand still in the starting position you'll first have to stop it and then reset.
+- On a second terminal the ```server``` starts running: it does nothing until someone calls the service /ChangeVel, in that case it will answer with the increment of speed required :+0.5 or -0.5 in case of increment and decrement, -1 in case of 'stop' (this is just a flag to notify that the speed must go to zero). In case of Reset it is encharged of calling an already given service ```/reset_position```, which sets the  robot to the starting position. In this project the reset only changes the position and not the speed, so if you want the robot to stand still in the starting position you'll first have to stop it and then reset. This terminal also prints the command received, so it can be used to have an history of the commands received from the user.
 	
 - Another terminal will be opened for the  ```input_console```: it will show to the user the commands that he can write, that is:
 	* ```r``` to RESET the robot's position
 	* ```s``` to STOP the robot
 	* ```i``` to INCREASE velocity
 	* ```d``` to DECREASE velocity
- 	
+  This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will publish this response as a custom message that can be read from the Controller to actually modify the current speed.
+ 
+(**) ```REMARK``` : I'm conscious that this service could be avoided and I could basically have the same behaviour just using the custom message, nevertheless since the goal of this assignment (I guess) was to gain experience with ROS I decided to implement it this way in order to better understand the mechanisms of services.
+	
+	
  ## Code explanation
  
  For the code inserted in **assignment.py** file i produced different functions in order to create the robot's behaviour previously described.

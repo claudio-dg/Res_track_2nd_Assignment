@@ -1,0 +1,6 @@
+<launch>
+   <node name="world" pkg="stage_ros" type="stageros" args="$(find second_assignment)/world/my_world.world" />
+   <node name="controller_node" pkg="second_assignment" type="second_assignment_node" launch-prefix="lxterminal -e"  output="screen"/>
+   <node name="console_node" pkg="second_assignment" type="console_node" output="screen" launch-prefix="lxterminal -e"/>
+   <node name="server_node" pkg="second_assignment" type="server_node" output="screen" launch-prefix="lxterminal -e"/>
+</launch>

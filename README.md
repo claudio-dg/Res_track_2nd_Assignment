@@ -121,15 +121,11 @@ The ROS package of the project is called "second_assignment", it contains one cu
  The main of this is script is is simply the following:
 ```bash
 int main (int argc, char **argv)
-{
-// Initialize the node, setup the NodeHandle for handling the communication with the ROS system 
+{ 
 ros::init(argc, argv, "controller"); 
 ros::NodeHandle nh;
-// Define the subscriber to robot's lasers
 ros::Subscriber sub = nh.subscribe("/base_scan", 1, LasersCallback); 
-// Define the publisher for robot's velocity 
 pub = nh.advertise<geometry_msgs::Twist> ("/cmd_vel", 1);
-// Define the subscriber to my msg variation
 ros::Subscriber my_sub = nh.subscribe("/variation", 1, ChangeVelCallback);
 ros::spin();
 return 0;

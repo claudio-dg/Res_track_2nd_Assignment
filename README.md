@@ -87,27 +87,13 @@ The ROS package of the project is called "second_assignment", it contains one cu
 
  ### Behaviour description  : ### 
  
- As previously said, everything is based on an infinite while loop, within which the robot checks possible conditions and acts consequently:
- 1. First of all it checks whether it is already holding a token or not: 
- - if so it leaves it behind himself and ckecks again,
- otherwise it starts searching for a token by scanning walls and silver tokens in a range with reduced angulation with respect to the 360° degrees given by deafult
- 2. then, before moving, it detects if it is close to a wall (a golden box) :
- - if so, it avoids the wall in different ways, based on the fact that wall might be in front of it or at one oh his sides.
- 3. Otherwise the robot can move without risking collisions, so it checks if it sees a silver token inside of its range :
- - if it doesn't, it decides to move forward a bit , in order to maybe get a better position with respect to a token.
- 4. If it sees a token, instead, it looks for a golden obstacle placed in between:
- - if it finds one, it again decides to move forward to get a better position with respect to the token.
- 5. But if it sees no obstacles it makes one last check: it checks if it is close enough to the detected token, 
- - if it is, it simply grabs the box, otherwise he moves a little bit(*) towards it
+ After running the ROS launchFile the whole project begins to work.
+ - First it will open the simulation environment that ```bash prova```represents Monza's Circuit:
  
- In the end the loop restarts from point 1. 
- 
- (*) REMARK : in this situation the robot does not simply move forward until he grabs the box, but it moves "one step at the time" and returns the control to point 1 after every step: this because i wanted to reduce possible mistakes caused by an error in the obstacles detection.
- This simply means that, when the robot moves towards the token, it is still capable of scanning the area around him and to avoid obstacles; so for example, if it didn't detect an obstacle at the beginning of the movement, but while reaching the token it is getting dangerously close to a wall at its left, it is capable of seeing that and "takes a safier path".
-
- 
- 
- 
+ <p align="center">
+<img src="" width="800"  />
+<p>
+ - then it will run the **Controller** : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit.
  ## Code explanation
  
  For the code inserted in **assignment.py** file i produced different functions in order to create the robot's behaviour previously described.

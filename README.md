@@ -111,10 +111,10 @@ The ROS package of the project is called "second_assignment", it contains one cu
 	
  ## Code explanation
  
- For the code inserted in **assignment.py** file i produced different functions in order to create the robot's behaviour previously described.
- 
- Firstly i splitted the given function to turn the robot in two separates functions, just for making the code more readable:
- 
+ To reproduce the behaviour previously described i wrote 3 C++ programms contained in the ```src``` folder:
+	- **controller.cpp**
+	- **server.cpp**
+	- **input_console.cpp**
  
 ```bash
 def my_turn_left(speed, seconds):

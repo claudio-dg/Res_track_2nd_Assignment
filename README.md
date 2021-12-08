@@ -116,31 +116,98 @@ The ROS package of the project is called "second_assignment", it contains one cu
  - server.cpp
  - input_console.cpp
 	
-	
- 
+### Controller.cpp  : ###	
+
+ The main of this is script is is simply the following:
 ```bash
-def my_turn_left(speed, seconds):
-def my_turn_right(speed, seconds):
+int main (int argc, char **argv)
+{
+// Initialize the node, setup the NodeHandle for handling the communication with the ROS system 
+ros::init(argc, argv, "controller"); 
+ros::NodeHandle nh;
+// Define the subscriber to robot's lasers
+ros::Subscriber sub = nh.subscribe("/base_scan", 1, LasersCallback); 
+// Define the publisher for robot's velocity 
+pub = nh.advertise<geometry_msgs::Twist> ("/cmd_vel", 1);
+// Define the subscriber to my msg variation
+ros::Subscriber my_sub = nh.subscribe("/variation", 1, ChangeVelCallback);
+ros::spin();
+return 0;
+}
 ```
- 
- Then i also created two different functions for detecting nearest golden or silver box: this time i splitted them (instead of making just one) for two reasons, that is again making the code easily readable and to use different detecting ranges for the boxes. These functions, in fact, simply detect tokens thate are visible within a certain range in front of the robot, so that it only considers walls or tokens if it is actually moving towards them, while it ignores those who are behind it.
- The resulting degrees used for golden/silver ranges were obtained esperimentally, and they represent the best ones i found for the behaviour of my robot. 
- 
- 
- ```bash
-def find_SILVER_token(): 
-    dist=100
-    silver_range = 45
-    for token in R.see():
-        if token.dist < dist and token.info.marker_type == MARKER_TOKEN_SILVER and -silver_range < token.rot_y < silver_range
-            dist=token.dist
-	    rot_y=token.rot_y
-	    
-    if dist==100:
-	return -1, -1
+Here we have initialization of the node and the susbcription to the two topics: ```/base_scan``` and ```/variation```, along with the definition of the publisher on ```/cmd_vel``` topic. 
+Due to these two subscriptions i had to implement two different callback functions: ```LasersCallback``` &  ```ChangeVelCallback```.
+
+The first one is based on feedbacks received from robot'lasers:
+```bash
+void LasersCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
+{
+ for(int i=0; i<=720;i++)
+ {
+  ranges_array[i] = msg->ranges[i]; 
+ }
+ float right_dist = GetMinDistance(20,120, ranges_array);
+ float left_dist = GetMinDistance(600,700, ranges_array);
+ float frontal_dist = GetMinDistance(300,420,ranges_array);
+//if close to a FRONTAL wall
+ if(frontal_dist<1.5) 
+ {
+ 	if(right_dist<left_dist) 
+ 	 Turn_left();
+ 	else
+ 	 Turn_right();
+ }
+	else 
+ 	Move_forward();
+ pub.publish(my_vel); 
+ if(previous_vel != my_vel.linear.x){
+ system("clear");
+ printf("\n velocita attuale e'  %f  [variazione totale = %f]\n", my_vel.linear.x, variation );
+ previous_vel = my_vel.linear.x;
+ }
+}
+```
+It is a pretty simple function that takes information from laser scanners by reading their ```ranges[]``` parameter, and checks for the closest wall in 3 different directions with an algorithm similar to the one of the first assignnment. I divided the range of detection in 3 parts: one for the front side of the robot and the others for its left and right; this function calculates the minimum distance to a wall for each part thanks to a function that i called ```GetMinDistance``` which is defined as follows:
 	
-    else:
-   	return dist, rot_y
+```bash
+ float GetMinDistance(int min_index,int max_index, float ranges_array[])
+{
+	float min_distance = 999;
+	for(int i = min_index; i <= max_index; i++)
+	{
+		if(ranges_array[i] < min_distance)
+			min_distance = ranges_array[i];
+	}
+	return min_distance;
+}
+```
+ After doing this the robot moves forward if there are no walls in front of him. otherwise it curves a bit towards the opposite direction of the closest wall: in order to do this movement i had to publish a message on ```cmd_vel``` topic after having modified the values in these ways:
+	```bash
+	void Move_forward()
+{
+	my_vel.linear.x = STARTING_VEL + variation; 
+	my_vel.angular.z = 0;
+}
+	```
+	```bash
+	void Turn_left()
+{	
+	my_vel.linear.x = 0.8;
+ 	my_vel.angular.z = 2;
+}
+	```
+ Notice that when moving forward the robot has an additional component called "variation": this is the value that is going to be received through the other topic ```/variation```, and that will modify the current velocity according to user's inputs.
+	
+So the Callback to this specific topic is the following and will simply modify this "variation" value: it only has one "if statement" that makes the robot stop in case the user wrote 's' (that corresponds to the -1 flag value) or in case the total variation would cause the robot to move backwards.
+ ```bash
+void ChangeVelCallback(const second_assignment::Variation::ConstPtr& my_msg)
+{
+ variation = variation + my_msg->variation_val;
+ if(variation < -STARTING_VEL or my_msg->variation_val == -1 )
+ {
+  variation = -STARTING_VEL; 
+ }
+}
 ```
 															       
 ```bash
@@ -289,9 +356,8 @@ while(1):
 	release_token()
 	
 ```
- * REMARK: within the 'assigment.py' file you'll find the whole code introduced in this README, along with futher explanations through comments in which, for example, i explain more in details the inputs and otputs of every function.
- There also are multiple "print()" present in the code, that allow to know "step by step" what the robot is doing during the simulation, by keeping the terminal opened while running the script.
-I decided to remove the comments and the "prints()" from the bodies of the function reported in this README in order to avoid weighting too much its reading.
+ * REMARK: within the .cpp files you'll find the whole code introduced in this README, along with futher explanations through comments in which, for example, i explain more in details the inputs and otputs of every function.
+I decided to remove the major part of the comments from the bodies of the function reported in this README in order to avoid weighting too much its reading.
  
  
  

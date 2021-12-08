@@ -131,7 +131,7 @@ ros::spin();
 return 0;
 }
 ```
-Here we have initialization of the node and the susbcription to the two topics: ```/base_scan``` and ```/variation```, along with the definition of the publisher on ```/cmd_vel``` topic. 
+Here we the have initialization of the node and the susbcription to the two topics: ```/base_scan``` and ```/variation```, along with the definition of the publisher on ```/cmd_vel``` topic. 
 Due to these two subscriptions i had to implement two different callback functions: ```LasersCallback``` &  ```ChangeVelCallback```.
 
 The first one is based on feedbacks received from robot'lasers:

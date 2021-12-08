@@ -178,20 +178,21 @@ It is a pretty simple function that takes information from laser scanners by rea
 }
 ```
  After doing this the robot moves forward if there are no walls in front of him. otherwise it curves a bit towards the opposite direction of the closest wall: in order to do this movement i had to publish a message on ```cmd_vel``` topic after having modified the values in these ways:
-	```bash
+```bash
 	void Move_forward()
 {
 	my_vel.linear.x = STARTING_VEL + variation; 
 	my_vel.angular.z = 0;
 }
-	```
-	```bash
+```
+	
+```bash
 	void Turn_left()
 {	
 	my_vel.linear.x = 0.8;
  	my_vel.angular.z = 2;
 }
-	```
+```
  Notice that when moving forward the robot has an additional component called "variation": this is the value that is going to be received through the other topic ```/variation```, and that will modify the current velocity according to user's inputs.
 	
 So the Callback to this specific topic is the following and will simply modify this "variation" value: it only has one "if statement" that makes the robot stop in case the user wrote 's' (that corresponds to the -1 flag value) or in case the total variation would cause the robot to move backwards.

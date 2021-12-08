@@ -113,9 +113,11 @@ The ROS package of the project is called "second_assignment", it contains one cu
  
  To reproduce the behaviour previously described i wrote 3 C++ programms contained in the ```src``` folder:
 	
-	-  **controller.cpp**
-	-  **server.cpp**
-	-  **input_console.cpp**
+	*  **controller.cpp**
+	*  **server.cpp**
+	*  **input_console.cpp**
+	
+	
  
 ```bash
 def my_turn_left(speed, seconds):

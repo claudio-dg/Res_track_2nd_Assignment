@@ -75,8 +75,7 @@ The project is based on the ROS scheme that is shown in the following image:
 <p>
  
 The ROS package of the project is called "second_assignment" and it contains four main nodes:
-	1. prova
-	2. dwdw
+ 1. **/world**
 
  ### Behaviour description  : ### 
  
@@ -282,21 +281,6 @@ while(1):
  * REMARK: within the 'assigment.py' file you'll find the whole code introduced in this README, along with futher explanations through comments in which, for example, i explain more in details the inputs and otputs of every function.
  There also are multiple "print()" present in the code, that allow to know "step by step" what the robot is doing during the simulation, by keeping the terminal opened while running the script.
 I decided to remove the comments and the "prints()" from the bodies of the function reported in this README in order to avoid weighting too much its reading.
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  

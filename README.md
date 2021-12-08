@@ -69,7 +69,7 @@ To run the input console.
 The project is based on the ROS scheme that is shown in the following image:
 
 <p align="center">
-<img src="https://github.com/claudio-dg/second_assignment/blob/main/rosgraph.png?raw=true" width="800"  />
+<img src="https://github.com/claudio-dg/second_assignment/blob/main/rosgraph.png?raw=true" width="900"  />
 <p>
  
 The ROS package of the project is called "second_assignment", it contains one custom msg, a custom service and four main nodes:

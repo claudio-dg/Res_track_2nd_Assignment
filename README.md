@@ -76,7 +76,7 @@ The ROS package of the project is called "second_assignment", it contains one cu
  1. **/world** : 
  - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can receive msgs to set the robot' speed.
 2. **/controller_node**	:
-- It subscribes to the /base_scan topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message "/variation" ** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the /cmd_vel topic.
+- It subscribes to the /base_scan topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message "/variation"** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the /cmd_vel topic.
 3. **/server_node** :	
 - It implements the **custom service "/ChangeVel"** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (i.e. 'i' corresponds to +0.5).
 4. **/console_node** :	

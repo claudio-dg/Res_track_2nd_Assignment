@@ -112,10 +112,9 @@ The ROS package of the project is called "second_assignment", it contains one cu
  ## Code explanation
  
  To reproduce the behaviour previously described i wrote 3 C++ programms contained in the ```src``` folder:
-	
-	*  **controller.cpp**
-	*  **server.cpp**
-	*  **input_console.cpp**
+	* controller.cpp
+	* server.cpp
+	* input_console.cpp
 	
 	
  

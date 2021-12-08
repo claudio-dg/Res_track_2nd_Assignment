@@ -72,9 +72,18 @@ The project is based on the ROS scheme that is shown in the following image:
 <img src="https://github.com/claudio-dg/second_assignment/blob/main/rosgraph.png?raw=true" width="800"  />
 <p>
  
-The ROS package of the project is called "second_assignment" and it contains four main nodes:
- 1. **/world** : which was already given and sets the simulation environment.
- - as we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can 	   receive msgs to set the robot' speed
+The ROS package of the project is called "second_assignment", it contains one custom msg, a custom service and four main nodes:
+ 1. **/world** : 
+ - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can receive msgs to set the robot' speed.
+2. **/controller_node**	:
+- It subscribes to the /base_scan topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message "/variation" ** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the /cmd_vel topic.
+3. **/server_node** :	
+- It implements the **custom service "/ChangeVel"** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (i.e. 'i' corresponds to +0.5).
+4. **/console_node** :	
+- This is the input console which subscribes to the /base_scan topic (*); it calls the custom service /ChangeVel giving as input the command received from the user, then it communicates the response to the controller node by publishing it on the /variation topic as previously said.
+
+(*) REMARK : this subscription was simply made for having a continuous callback: it is not actually interested in the messages published in there, but it just uses it as an infinite while loop. 
+
 
  ### Behaviour description  : ### 
  

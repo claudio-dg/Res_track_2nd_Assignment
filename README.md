@@ -91,7 +91,7 @@ The ROS package of the project is called "second_assignment", it contains one cu
  - First it will open the simulation environment that represents Monza's Circuit:
  
  <p align="center">
-<img src="https://github.com/claudio-dg/second_assignment/blob/main/tracciato.png?raw=true" width="800"  />
+<img src="https://github.com/claudio-dg/second_assignment/blob/main/Monza_circuit.png?raw=true" width="800"  />
 <p>
  - then it will run the **Controller** : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit.
  ## Code explanation

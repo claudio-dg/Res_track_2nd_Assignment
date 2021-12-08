@@ -74,21 +74,21 @@ The project is based on the ROS scheme that is shown in the following image:
  
 The ROS package of the project is called "second_assignment", it contains one custom msg, a custom service and four main nodes:
  1. **/world** : 
- - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic /base_scan with information regarding robot's lasers scan, and is subscribed to /cmd_vel topic, so that it can receive msgs to set the robot' speed.
+ - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic ```/base_scan``` with information regarding robot's lasers scan, and is subscribed to ```/cmd_vel topic```, so that it can receive msgs to set the robot' speed.
 2. **/controller_node**	:
-- It subscribes to the /base_scan topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message "/variation"** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the /cmd_vel topic.
+- It subscribes to the ```/base_scan``` topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message ```"/variation```"** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the ```/cmd_vel topic```.
 3. **/server_node** :	
-- It implements the **custom service "/ChangeVel"** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (i.e. 'i' corresponds to +0.5).
+- It implements the **custom service ```"/ChangeVel"```** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (i.e. 'i' corresponds to +0.5).
 4. **/console_node** :	
-- This is the input console which subscribes to the /base_scan topic (*); it calls the custom service /ChangeVel giving as input the command received from the user, then it communicates the response to the controller node by publishing it on the /variation topic as previously said.
+- This is the input console which subscribes to the ```/base_scan``` topic (*); it calls the custom service ```/ChangeVel``` giving as input the command received from the user, then it communicates the response to the controller node by publishing it on the ```/variation``` topic as previously said.
 
-(*) REMARK : this subscription was simply made for having a continuous callback: it is not actually interested in the messages published in there, but it just uses it as an infinite while loop. 
+(*) ```REMARK``` : this subscription was simply made for having a continuous callback: it is not actually interested in the messages published in there, but it just uses it as an infinite while loop. 
 
 
  ### Behaviour description  : ### 
  
  After running the ROS launchFile the whole project begins to work.
- - First it will open the simulation environment that ```bash prova```represents Monza's Circuit:
+ - First it will open the simulation environment that represents Monza's Circuit:
  
  <p align="center">
 <img src="" width="800"  />

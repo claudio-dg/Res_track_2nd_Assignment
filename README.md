@@ -100,10 +100,10 @@ The ROS package of the project is called "second_assignment", it contains one cu
 - On a second terminal the ```server``` starts running: it does nothing until someone calls the service /ChangeVel, in that case it will answer with the increment of speed required :+0.5 or -0.5 in case of increment and decrement, -1 in case of 'stop' (this is just a flag to notify that the speed must go to zero). In case of Reset it is encharged of calling an already given service ```/reset_position```, which sets the  robot to the starting position. In this project the reset only changes the position and not the speed, so if you want the robot to stand still in the starting position you'll first have to stop it and then reset.
 	
 - Another terminal will be opened for the  ```input_console```: it will show to the user the commands that he can write, that is:
-	*```r``` to RESET the robot's position
-	*```s``` to STOP the robot
-	*```i``` to INCREASE velocity
-	*```d``` to DECREASE velocity
+	* ```r``` to RESET the robot's position
+	* ```s``` to STOP the robot
+	* ```i``` to INCREASE velocity
+	* ```d``` to DECREASE velocity
  	
  ## Code explanation
  

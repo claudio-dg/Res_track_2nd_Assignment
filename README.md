@@ -1,52 +1,42 @@
-Research Track 1^st Assignment
+Research Track 2^nd Assignment
 ================================
 
-This is a simple, portable robot simulator developed by [Student Robotics](https://studentrobotics.org).
-Some of the arenas and the exercises have been modified for the Research Track I course.
-This repository in particular contains the result of my personal work for the first Assignment of the course.
-The goal of this assignment is to obtain a simulation in which the robot:
+This repository contains the result of my personal work for the second Assignment of the course.
+The goal of this assignment is to obtain a simulation in which a robot:
 
-1. constantly drives around the circuit in the counter-clockwise direction
-2. avoids touching the golden boxes
-3. when close to a silver box, grabs it, and moves it behind itself
+1. constantly drives around Monza's circuit.
+2. provides a node which interacts with the user to increase/decrease the speed and reset the position of the robot.
+
+To do this we had to use ROS for controlling the robot and C++ as programming language.
 
 
 
 Table of contents
 ----------------------
 
-* [Setup](#setup)
-* [Required Software](#required-software)
+* [Setup-and-nodes-Introduction](#setup-and-nodes-Introduction)
 * [Flowchart and behaviour description](#flowchart-and-behaviour-description)
 * [Code explanation](#code-explanation)
 
 
-## Setup
+## Setup-and-nodes-Introduction
 
-this repository Contains all the useful files to run the script that i produced for this assignment.
+This repository Contains all the useful files to run the script that i produced for this assignment.
 To try it, it is sufficient to clone this repository: 
 
 ```bash
-$ git clone https://github.com/claudio-dg/Research_Track-Assignments.git
+$ git clone https://github.com/claudio-dg/Res_track_2nd_Assignment.git
 ```
 
-and then type the following commands in the terminal to move to the correct directory and to run the script:
+and then type the following command in the terminal to simultaneously launch all the neceassary nodes through the **"launchFile"**:
 
 ```bash
-$ cd Research_Track-Assignments
-$ python2 run.py assignment.py
+$ roslaunch second_assignment starter.launch
+
 ```
 Scripts contained in the first three directories (i.e **games**, **sr** and **tests**) and in the **run.py** and **License.md** files have not been modified, 
 so the code that i produced is all included in the **assignment.py** file.
 
-
-
-Required Software
-----------------------
-
-The simulator requires a Python 2.7 installation, the [pygame](http://pygame.org/) library, [PyPyBox2D](https://pypi.python.org/pypi/pypybox2d/2.1-r331), and [PyYAML](https://pypi.python.org/pypi/PyYAML/).
-
-Pygame, unfortunately, can be tricky (though [not impossible](http://askubuntu.com/q/312767)) to install in virtual environments. If you are using `pip`, you might try `pip install hg+https://bitbucket.org/pygame/pygame`, or you could use your operating system's package manager. Windows users could use [Portable Python](http://portablepython.com/). PyPyBox2D and PyYAML are more forgiving, and should install just fine using `pip` or `easy_install`.
 
 
 ## Flowchart and behaviour description

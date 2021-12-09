@@ -106,7 +106,8 @@ The ROS package of the project is called "second_assignment", it contains one cu
 	* ```s``` to STOP the robot
 	* ```i``` to INCREASE velocity
 	* ```d``` to DECREASE velocity
-  This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will publish this response as a custom message that can be read from the Controller to actually modify the current speed.
+	
+This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will publish this response as a custom message that can be read from the Controller to actually modify the current speed.
  
 (**) ```REMARK``` : I'm conscious that this service could be avoided and I could basically have the same behaviour just using the custom message, nevertheless since the goal of this assignment (I guess) was to gain experience with ROS I decided to implement it this way in order to better understand the mechanisms of services.
 	

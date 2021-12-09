@@ -121,7 +121,7 @@ This node does nothing until the user inserts an input: in that case it calls th
 	
 ### Controller.cpp  : ###	
 
- The main of this is script is is simply the following:
+ The ```main``` of this script is simply the following:
 ```bash
 int main (int argc, char **argv)
 { 

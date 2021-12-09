@@ -3,8 +3,6 @@
 #include "sensor_msgs/LaserScan.h" 
 //for /cmd_vel topic
 #include "geometry_msgs/Twist.h" 
-//for my service ChangeVel.srv
-#include "second_assignment/ChangeVel.h"
 //for my message variation.msg 
 #include "second_assignment/Variation.h"
 
@@ -18,6 +16,7 @@ float ranges_array[721];
 //a variable which is updated from the input given in the input_console to increase/decrease speed
 float variation = 0; 
 float previous_vel = 0;
+
 
 void Turn_right()
 {
@@ -78,6 +77,7 @@ float GetMinDistance(int min_index,int max_index, float ranges_array[])
 /* ***************************************************************************/
 void LasersCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 {
+
 //put lasers_scan values into an array
  for(int i=0; i<=720;i++)
  {
@@ -114,7 +114,8 @@ void LasersCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
  //print current velocity only if it changes
  if(previous_vel != my_vel.linear.x){
  system("clear");
- printf("\n velocita attuale e'  %f  [variazione totale = %f]\n", my_vel.linear.x, variation );
+ printf("\n velocita lineare attuale e'  %f  [variazione totale = %f",my_vel.linear.x,variation );
+ printf("\n velocita angolare attuale e'  %f\n", my_vel.angular.z );
  previous_vel = my_vel.linear.x;
  }
 }
@@ -151,6 +152,8 @@ ros::Subscriber sub = nh.subscribe("/base_scan", 1, LasersCallback);
 pub = nh.advertise<geometry_msgs::Twist> ("/cmd_vel", 1);
 // Define the subscriber to my msg variation
 ros::Subscriber my_sub = nh.subscribe("/variation", 1, ChangeVelCallback);
+
+
 ros::spin();
 return 0;
 }

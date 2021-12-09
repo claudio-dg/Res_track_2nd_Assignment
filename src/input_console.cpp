@@ -31,7 +31,7 @@ void myCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
  //wait for the existence of the service and then call it
  client.waitForExistence(); 
  client.call(change_vel);
- change_vel.response.change_value;
+ //change_vel.response.change_value;
  
  //i publish the obtained value as a msg of my topic /variation
  //so that it can be read from controller.cpp and modify the current robot's speed

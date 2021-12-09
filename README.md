@@ -218,7 +218,7 @@ void ChangeVelCallback(const second_assignment::Variation::ConstPtr& my_msg)
 	
 	
  * REMARK: within the .cpp files contained in the ```src``` you'll find the whole code introduced in this ```README```, along with futher explanations through comments in which, for example, I explain more in details the inputs and otputs of every function.
-I decided to remove the major part of the comments from the bodies of the function reported in this README in order to avoid weighting too much its reading.
+I decided to remove the major part of the comments from the bodies of the functions reported in this README in order to avoid weighting too much its reading.
  
  
 	

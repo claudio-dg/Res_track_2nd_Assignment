@@ -61,7 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    ChangeVel.srv
-#   Service2.srv
+   UpdateVel.srv
  )
 
 ## Generate actions in the 'action' folder

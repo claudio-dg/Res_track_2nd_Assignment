@@ -61,12 +61,7 @@ ros::init(argc, argv, "my_server");
 ros::NodeHandle n;
 ros::ServiceServer service= n.advertiseService("/changevel", Mycallback);
 
-
-
 ros::spin();
-
-
-
 return 0;
 
 }

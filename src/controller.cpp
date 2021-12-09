@@ -3,8 +3,8 @@
 #include "sensor_msgs/LaserScan.h" 
 //for /cmd_vel topic
 #include "geometry_msgs/Twist.h" 
-//for my message variation.msg 
-#include "second_assignment/Variation.h"
+//for my service UpdateVel.srv
+#include "second_assignment/UpdateVel.h"
 
 #define STARTING_VEL 2
 
@@ -119,26 +119,25 @@ void LasersCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
  previous_vel = my_vel.linear.x;
  }
 }
-/* ***************************************************************************/
 
 
-//CALLBACK for my own topic: "/variation"
-/* ***************************************************************************/
-void ChangeVelCallback(const second_assignment::Variation::ConstPtr& my_msg)
+//CALLBACK for my own service: "/updatevel" which will modify the velocity.
+ /* ***************************************************************************/
+bool Servicecallback (second_assignment::UpdateVel::Request &req, second_assignment::UpdateVel::Response &res)
 {
- 
- variation = variation + my_msg->variation_val;
+ variation = variation + req.value;
  
  //if vel is already zero OR a STOP is received set variation to -start_vel to stop the robot
  // and to avoid going bacwards
- if(variation < -STARTING_VEL or my_msg->variation_val == -1 )
+ if(variation < -STARTING_VEL or req.value == -1 )
  {
   variation = -STARTING_VEL; //the robot stands still
  }
+return true;
 }
 
-/* ***************************************************************************/
 
+/* ***************************************************************************/
 
 
 int main (int argc, char **argv)
@@ -150,9 +149,8 @@ ros::NodeHandle nh;
 ros::Subscriber sub = nh.subscribe("/base_scan", 1, LasersCallback); 
 // Define the publisher for robot's velocity 
 pub = nh.advertise<geometry_msgs::Twist> ("/cmd_vel", 1);
-// Define the subscriber to my msg variation
-ros::Subscriber my_sub = nh.subscribe("/variation", 1, ChangeVelCallback);
-
+//define the server for my service /Updatevel
+ros::ServiceServer service= nh.advertiseService("/updatevel", Servicecallback);
 
 ros::spin();
 return 0;

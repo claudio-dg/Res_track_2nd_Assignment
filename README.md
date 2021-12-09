@@ -74,15 +74,15 @@ The project is based on the ROS scheme that is shown in the following image:
 <img src="https://github.com/claudio-dg/second_assignment/blob/main/images/my_rosgraph.png?raw=true" width="900"  />
 <p>
  
-The ROS package of the project is called "second_assignment", it contains one custom msg, a custom service and four main nodes:
+The ROS package of the project is called "second_assignment", it containstwo custom services and four main nodes:
  1. **/world** : 
  - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic ```/base_scan``` with information regarding robot's lasers scan, and is subscribed to ```/cmd_vel topic```, so that it can receive msgs to set the robot' speed.
 2. **/controller_node**	:
-- It subscribes to the ```/base_scan``` topic for havig instant information about the environment sorrounding the robot. Then it also subscribes to the **custom message ```"/variation```"** (that simply consists in a float value) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the ```/cmd_vel topic```.
+- It subscribes to the ```/base_scan``` topic for havig instant information about the environment sorrounding the robot. Then it also implements the server of the custom service **```"/UpdateVel```"** (that simply takes a float value as input and has no response values) for being able of receiving the velocity changes required from the user via input. In the end it publishes robot's speed on the ```/cmd_vel topic```.
 3. **/server_node** :	
-- It implements the **custom service ```"/ChangeVel"```** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (i.e. 'i' corresponds to +0.5).
+- It implements the server of the **custom service ```"/ChangeVel"```** that receives a "char" as input and returns a float value, that is the variation of speed required from that specific input (e.g. 'i' corresponds to +0.5).
 4. **/console_node** :	
-- This is the input console which subscribes to the ```/base_scan``` topic (*); it calls the custom service ```/ChangeVel``` giving as input the command received from the user, then it communicates the response to the controller node by publishing it on the ```/variation``` topic as previously said.
+- This is the input console which subscribes to the ```/base_scan``` topic (*); it calls the custom service ```/ChangeVel``` giving as input the command received from the user, then it communicates the response to the controller node by calling the other custom service ```/UpdateVel``` topic as previously said, accordingly to the client-server model.
 
 (*) ```REMARK``` : this subscription was simply made for having a continuous callback: it is not actually interested in the messages published in there, but it just uses it as an infinite while loop. 
 
@@ -97,9 +97,9 @@ The ROS package of the project is called "second_assignment", it contains one cu
 <p>
 	
 	
- - Then it will run the  ```controller```  : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the nearest wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit. When a variation of speed is published on the custom message, the controller modifies the linear velocity of the robot, also setting it to zero if the user wanted to stop the robot. Note that Robot's velocity won't go under 0: this to avoid the robot going bacwards and crashing.
+ - Then it will run the  ```controller```  : it will make the robot start moving along the circuit with a constant linear velocity, only modyfing it in case of curves for avoiding crashes: when an "obstacle" is met the robot slows down a bit, and it steers in the opposite way of where the nearest wall is with a certain angular velocity, that allows to simulate the real behaviour of a car running in the circuit. When a variation of speed is received (that is when the custom service ```/UpdateVel``` is called), the controller modifies the linear velocity of the robot, also setting it to zero if the user wanted to stop the robot. Note that Robot's velocity won't go under 0: this to avoid the robot going bacwards and crashing.
 
-- On a second terminal the ```server``` starts running: it does nothing until someone calls the service /ChangeVel, in that case it will answer with the increment of speed required :+0.5 or -0.5 in case of increment and decrement, -1 in case of 'stop' (this is just a flag to notify that the speed must go to zero). In case of Reset it is encharged of calling an already given service ```/reset_position```, which sets the  robot to the starting position. In this project the reset only changes the position and not the speed, so if you want the robot to stand still in the starting position you'll first have to stop it and then reset. This terminal also prints the command received, so it can be used to have an history of the commands received from the user.
+- On a second terminal the ```server``` starts running: it does nothing until someone (thati is the input_console) calls the service /ChangeVel, in that case it will answer with the increment of speed required :+0.5 or -0.5 in case of increment and decrement, -1 in case of 'stop' (this is just a flag to notify that the speed must go to zero). In case of Reset it is encharged of calling an already given service ```/reset_position```, which sets the  robot to the starting position. In this project the reset only changes the position and not the speed, so if you want the robot to stand still in the starting position you'll first have to stop it and then reset. This terminal also prints the command received, so it can be used to have an history of the commands received from the user.
 	
 - Another terminal will be opened for the  ```input_console```: it will show to the user the commands that he can write, that is:
 	* ```r``` to RESET the robot's position
@@ -107,9 +107,9 @@ The ROS package of the project is called "second_assignment", it contains one cu
 	* ```i``` to INCREASE velocity
 	* ```d``` to DECREASE velocity
 	
-This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will publish this response as a custom message that can be read from the Controller to actually modify the current speed.
+This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will communicate this response to the controller by calling the ```/UpdateVel``` service to actually modify the current speed.
  
-(**) ```REMARK``` : I'm conscious that this service could be avoided and I could basically have the same behaviour just using the custom message, nevertheless since the goal of this assignment (I guess) was to gain experience with ROS I decided to implement it this way in order to better understand the mechanisms of services.
+(**) ```REMARK``` : This service ```/ChangeVel``` could be avoided and I could basically have the same behaviour just by making the mapping of the commands directly within the input_console , nevertheless I decided to implement it this way in order to better understand the mechanisms of services and to give more modularity to the project.
 	
 	
  ## Code explanation

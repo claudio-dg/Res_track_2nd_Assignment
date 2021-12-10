@@ -199,7 +199,7 @@ It is a pretty simple function that takes information from laser scanners by rea
 ```
  Notice that when moving forward the robot has an additional component called "variation": this is the value that is going to be modified through the call to the ```/UpdateVel``` service, and that will modify the current velocity according to user's inputs.
 	
-So the Callback to this specific service is the following and will simply modify this "variation" value: it only has one "if statement" that makes the robot stop in case the user wrote 's' (that corresponds to the -1 flag value) or in case the total variation would cause the robot to move backwards.
+So the Callback to this specific service is the following and will simply modify this "variation" value: in addiction to the update of the "variation" variable it only has one "if statement" that makes the robot stop in case the user wrote 's' (that corresponds to the -1 flag value) or in case the total variation would cause the robot to move backwards.
  ```bash
 bool Servicecallback (second_assignment::UpdateVel::Request &req, second_assignment::UpdateVel::Response &res)
 {

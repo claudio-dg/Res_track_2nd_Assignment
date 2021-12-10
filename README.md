@@ -18,7 +18,7 @@ Table of contents
 * [Project structure and behaviour description](#project-structure-and-behaviour-description)
 * [Code explanation](#code-explanation)
 * [ROSLAUNCH](#roslaunch)
-* [cmkae e package](#code-explanation)
+* [CMakeList & Package](#cmakelist-and-package)
 
 
 ## Setup

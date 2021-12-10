@@ -74,7 +74,7 @@ The project is based on the ROS scheme that is shown in the following image:
 <img src="https://github.com/claudio-dg/second_assignment/blob/main/images/my_rosgraph.png?raw=true" width="900"  />
 <p>
  
-The ROS package of the project is called ```"second_assignment"```, it explots two already given topics(```/cmd_vel```,```/base_scan```), two custom services (```/ChangeVel``` ,```UpdateVel```)  and four main nodes:
+The ROS package of the project is called ```"second_assignment"```, it exploits two already given topics(```/cmd_vel```,```/base_scan```), two custom services (```/ChangeVel``` ,```UpdateVel```)  and four main nodes:
  1. **/world** : 
  - which was already given and sets the simulation environment. As we can see from the image it publishes on the topic ```/base_scan``` with information regarding robot's lasers scan, and is subscribed to ```/cmd_vel``` topic so that it can receive msgs to set the robot' speed.
 2. **/controller_node**	:

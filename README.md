@@ -135,7 +135,7 @@ return 0;
 }
 ```
 Here we the have initialization of the node and the susbcription to the  topic ```/base_scan```, along with the definition of the publisher on ```/cmd_vel``` topic and of the server for the ```/UpdateVel``` service . 
-I had to implement two different callback functions: ```LasersCallback``` &  ```ChangeVelCallback```.
+I had to implement two different callback functions: ```LasersCallback``` &  ```Servicecallback```.
 
 The first one is based on feedbacks received from robot'lasers:
 ```bash

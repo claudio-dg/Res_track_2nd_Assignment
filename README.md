@@ -247,12 +247,12 @@ switch(given_input)
  	res.change_value = -1; 
  	break;	
  	
- case'i' :  //increase -> set the response of the service as +0.5
+ case 'i' :  //increase -> set the response of the service as +0.5
  	ROS_INFO("INCREASE RECEIVED");
  	res.change_value = +0.5;  	
  	break;
  	
- case'd' : //decrease -> set the response of the service as -0.5
+ case 'd' : //decrease -> set the response of the service as -0.5
  	ROS_INFO("DECREASE RECEIVED");
  	res.change_value = -0.5;
  	break;

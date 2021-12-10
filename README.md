@@ -344,7 +344,7 @@ generate_messages(
    std_msgs
  )
 ```
-In the emd for each executable i produced i wrote the following lines:
+In the end for each executable that i produced i wrote the following lines:
 	
  ```bash
 ## Add cmake target dependencies of the executable

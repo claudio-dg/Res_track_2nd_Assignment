@@ -330,13 +330,54 @@ Here you can find the code of the Ros Launch File i created for simplyfying the 
 For the success of this project of course i had to modify he CMakeList.txt and Package.xml to add the dependencies i needed:
  
  ### CMakeList.txt  : ###
- in the ```find_package()``` function 
+ in the ```find_package()``` function i added the ```message_generation``` and ```std_msgs``` packages for being able of creating my own custom services, then for the same purpose i uncommented the following lines inserting the name of my services:
+	
+```bash
+add_service_files(
+   FILES
+   ChangeVel.srv
+   UpdateVel.srv
+ )
+
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
+```
+In the emd for each executable i produced i wrote the following lines:
+	
+ ```bash
+## Add cmake target dependencies of the executable
+## same as for the library above
+add_dependencies(second_assignment_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(server_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(console_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+## Specify libraries to link a library or executable target against
+ target_link_libraries(second_assignment_node
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(server_node
+   ${catkin_LIBRARIES}
+)
+ target_link_libraries(console_node
+   ${catkin_LIBRARIES}
+)
+
+```
  
+  ### Package.xml  : ###
  
- 
- 
- 
- 
+ Here i added the following dependencies for the ```message_generation``` and ```std_msgs``` packages:
+```bash
+<build_depend>message_generation</build_depend>
+<build_depend>std_msgs</build_depend>
+<build_export_depend>message_generation</build_export_depend>
+<build_export_depend>std_msgs</build_export_depend>
+<exec_depend>message_generation</exec_depend>
+<exec_depend>std_msgs</exec_depend>
+    
+```
  
  
  

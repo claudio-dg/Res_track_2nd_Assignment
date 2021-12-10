@@ -17,7 +17,7 @@ Table of contents
 * [Setup](#setup)
 * [Project structure and behaviour description](#project-structure-and-behaviour-description)
 * [Code explanation](#code-explanation)
-* [ROSLAUNCH](#code-explanation)
+* [ROSLAUNCH](#roslaunch)
 * [cmkae e package](#code-explanation)
 
 
@@ -315,10 +315,22 @@ I decided to remove the major part of the comments from the bodies of the functi
  
 	
  ## Roslaunch
+Here you can find the code of the Ros Launch File i created for simplyfying the running of the project, so that you can avoid calling each node one at the time:
+```bash
+<launch>
+   <node name="world" pkg="stage_ros" type="stageros" args="$(find second_assignment)/world/my_world.world" />
+   <node name="controller_node" pkg="second_assignment" type="second_assignment_node" launch-prefix="lxterminal -e"  output="screen"/>
+   <node name="console_node" pkg="second_assignment" type="console_node" output="screen" launch-prefix="lxterminal -e"/>
+   <node name="server_node" pkg="second_assignment" type="server_node" output="screen" launch-prefix="lxterminal -e"/>
+</launch>	
 	
- ## Cmake e Package
+```	
+	
+ ## CMakeList and Package
+For the success of this project of course i had to modify he CMakeList.txt and Package.xml to add the dependencies i needed:
  
- 
+ ### CMakeList.txt  : ###
+ in the ```find_package()``` function 
  
  
  

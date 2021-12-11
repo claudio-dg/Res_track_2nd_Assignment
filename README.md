@@ -24,7 +24,7 @@ Table of contents
 ## Setup
 
 This repository Contains all the useful files to run the script that i produced for this assignment.
-To try it, it is sufficient to clone this repository: 
+To try it, it is sufficient to clone this repository in your ROS workspace: 
 
 ```bash
 $ git clone https://github.com/claudio-dg/Res_track_2nd_Assignment.git

@@ -36,7 +36,7 @@ and then type the following command in the terminal to simultaneously launch all
 $ roslaunch second_assignment starter.launch
 
 ```
-This Launch File has been made to make it easier to run the poject , but if you like you can manually run every single node by typing the following commands:
+This Launch File has been made to make it easier to run the project , but if you like you can manually run every single node by typing the following commands:
 
 ```bash
 $ roscore & 
@@ -107,7 +107,7 @@ The ROS package of the project is called ```"second_assignment"```, it exploits 
 	* ```i``` to INCREASE velocity
 	* ```d``` to DECREASE velocity
 	
-This node does nothing until the user inserts an input: in that case it calls the /ChangeVel service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will communicate this response to the controller by calling the ```/UpdateVel``` service to actually modify the current speed.
+This node does nothing until the user inserts an input: in that case it calls the ```/ChangeVel``` service (**) putting the input in the request, to receive the corresponding value of speed variation as response; in the end it will communicate this response to the controller by calling the ```/UpdateVel``` service to actually modify the current speed.
  
 (**) ```REMARK``` : This service ```/ChangeVel``` could be avoided and I could basically have the same behaviour just by making the mapping of the commands directly within the input_console , nevertheless I decided to implement it this way in order to better understand the mechanisms of services and to give more modularity to the project.
 	
